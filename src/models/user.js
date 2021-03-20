@@ -1,8 +1,14 @@
+/*
+  User model
+*/
+
+
 const mongoose = require('mongoose')
 const validator = require('validator')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 
+//Schema definition
 const userSchema = new mongoose.Schema({
     name : {
         type: String,
@@ -55,12 +61,7 @@ const userSchema = new mongoose.Schema({
     timestamps : true
 })
 
-// userSchema.virtual('notifyContacts',{
-//     ref: 'Contact',
-//     localField : '_id',
-//     foreignField : '_id'
-// })
-
+//Abstracting password and tokens from the user
 userSchema.methods.toJSON = function() {
     const user = this
     const userObject = user.toObject()
@@ -71,7 +72,7 @@ userSchema.methods.toJSON = function() {
     return userObject
 }
 
-
+//Generate Authentication tokens for every session
 userSchema.methods.generateAuthtoken = async function () {
     const user = this
     const token = jwt.sign({_id: user._id.toString()},'UserToken')
@@ -81,6 +82,7 @@ userSchema.methods.generateAuthtoken = async function () {
     return token
 }
 
+//Validating the user based on provided credentials
 userSchema.statics.validateCredentials = async(email,password) => {
    const user = await User.findOne({email})
    if(!user){
@@ -94,6 +96,8 @@ userSchema.statics.validateCredentials = async(email,password) => {
    return user
 }
  
+
+//Hashing the password in case of any update
 userSchema.pre('save',async function(next) {
     const user = this
     if(user.isModified('password')) {

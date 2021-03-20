@@ -1,3 +1,7 @@
+/*
+   User routes
+*/
+
 const express = require('express')
 const mongoose = require('mongoose')
 const User = require('../models/user')
@@ -6,6 +10,7 @@ const auth = require('../middleware/auth')
 
 const router = new express.Router()
 
+//Sign Up new User
 router.post('/new',async(req,res) => {
     const user = new User(req.body)
     const _id = new mongoose.Types.ObjectId()
@@ -29,6 +34,7 @@ router.post('/new',async(req,res) => {
    }
 })
 
+//Login user with credentials
 router.post('/login',async (req,res) => {
     
     try{
@@ -43,6 +49,7 @@ router.post('/login',async (req,res) => {
 
 })
 
+//Logout user from currently using device
 router.get('/logout',auth,async(req,res) => {
     try{
         const currentToken = req.token
@@ -60,6 +67,8 @@ router.get('/logout',auth,async(req,res) => {
     }
 })
 
+
+//Logout user from all devices
 router.get('/logoutall',auth,async(req,res) => {
     
     try{
@@ -71,6 +80,8 @@ router.get('/logoutall',auth,async(req,res) => {
     }
 })
 
+
+//Get user profile
 router.get('/me',auth,async(req,res) => {
     try{
         res.send(req.user)

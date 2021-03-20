@@ -1,3 +1,7 @@
+/*
+  Contact routes
+*/
+
 const express = require('express')
 const auth = require('../middleware/auth')
 const Contact = require('../models/contact')

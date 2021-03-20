@@ -1,6 +1,11 @@
+/*
+  Hospital model
+*/
+
 const mongoose = require('mongoose')
 const { default: validator } = require('validator')
 
+//Hospital Schema definition
 const hospitalSchema = mongoose.Schema({
     name : {
         type: String,

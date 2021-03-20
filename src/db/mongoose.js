@@ -1,3 +1,7 @@
+/*
+ Mongodb declaration and mongoose connection
+*/
+
 const mongoose = require('mongoose')
 
 

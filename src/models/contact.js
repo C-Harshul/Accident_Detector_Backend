@@ -1,6 +1,12 @@
+/*
+  Contact model 
+*/
+
 const mongoose = require('mongoose')
 const { default: validator } = require('validator')
 
+
+//contact Schema defintion
 const contactSchema = mongoose.Schema({
     name : {
         type: String,
