@@ -9,6 +9,8 @@ const Hospital = require('../models/hospital')
 
 const router = new express.Router()
 
+
+//Add one Hospital
 router.post('/addone' ,auth,async(req,res) =>{
    const user = req.user
    const hospital = new Hospital (req.body)
@@ -25,6 +27,8 @@ router.post('/addone' ,auth,async(req,res) =>{
 
 })
 
+
+//Add a list of hospitals
 router.post('/add',auth,async(req,res) => {
     const user = req.user
     const hospitals = req.body
@@ -45,7 +49,7 @@ router.post('/add',auth,async(req,res) => {
     }
 })
 
-
+//Get a list of hospitals
 router.get('/',auth,async(req,res) => {
     const user = req.user
    

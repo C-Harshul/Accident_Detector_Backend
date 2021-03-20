@@ -9,6 +9,8 @@ const Contact = require('../models/contact')
 
 const router = new express.Router()
 
+
+//Add one contact
 router.post('/addone' ,auth,async(req,res) =>{
    const user = req.user
    const contact = new Contact (req.body)
@@ -25,6 +27,8 @@ router.post('/addone' ,auth,async(req,res) =>{
 
 })
 
+
+//Add a list of contacts
 router.post('/add',auth,async(req,res) => {
   const user = req.user
   const contacts = req.body
@@ -44,7 +48,7 @@ router.post('/add',auth,async(req,res) => {
   }
 })
 
-
+//Get the list of contacts
 router.get('/',auth,async(req,res) => {
     const user = req.user
    
