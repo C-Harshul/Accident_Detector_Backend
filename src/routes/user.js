@@ -30,6 +30,22 @@ router.post('/login',async (req,res) => {
 
 })
 
+router.get('/logout',auth,(req,res) => {
+    try{
+        const currentToken = req.token
+        const user = req.user
+        const activeTokens = user.tokens
+        activeTokens  = activeTokens.filter((token) =>{
+            return token != currentToken
+        })
+        user.tokens = activeTokens
+        await user.save()
+        res.send(user)
+    } catch(e) {
+       res.status(500).send()
+    }
+})
+
 router.get('/me',auth,async(req,res) => {
     try{
         res.send(req.user)
@@ -37,5 +53,7 @@ router.get('/me',auth,async(req,res) => {
         res.status(500).send() 
     }
 })
+
+
 
 module.exports = router
