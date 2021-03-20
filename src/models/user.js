@@ -11,11 +11,6 @@ const userSchema = new mongoose.Schema({
     number : {
         type : String,
         unique: true,
-        validate(value) {
-            if(!validator.isMobilePhone(value)) {
-                throw new Error('Phone number is invalid')
-            }
-        } 
     },
     email : {
         type: String,
@@ -26,6 +21,13 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+
+    password : {
+        type : String,
+        trim : true,
+        required : true
+    },
+
     notifyContacts : [{
        contact_ID : {
            type: mongoose.Schema.Types.ObjectId,
@@ -38,11 +40,7 @@ const userSchema = new mongoose.Schema({
             ref: 'Hospital'
         }
     }],
-    password : {
-        type : String,
-        trim : true,
-        required : true
-    },
+    
     tokens : [{
         token : {
             type : String,

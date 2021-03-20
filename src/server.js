@@ -6,9 +6,9 @@ const port = process.env.PORT||3000
 
 app.use(express.json())
 
-const userRoutes = require('./routes/users')
+const userRoutes = require('./routes/user')
 
-app.use('/users',userRoutes)
+app.use('/user',userRoutes)
 
 app.listen(port,() => {
     console.log('Server on port' + port)
