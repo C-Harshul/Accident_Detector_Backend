@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../models/user')
+const auth = require('../middleware/auth')
 
 const router = new express.Router()
 
@@ -15,10 +16,25 @@ router.post('/new',async(req,res) => {
    }
 })
 
-
-router.get('/me',async(req,res) => {
+router.post('/login',async (req,res) => {
+    
     try{
-        const user = User.findOne({email : req.})
+    
+        const user = await User.validateCredentials(req.body.email,req.body.password)
+        const token = await user.generateAuthtoken()
+        res.send({user,token})
+                  
+    } catch(e) {
+        res.status(404).send()  
+    }
+
+})
+
+router.get('/me',auth,async(req,res) => {
+    try{
+        res.send(req.user)
+    } catch(e) {
+        res.status(500).send() 
     }
 })
 
