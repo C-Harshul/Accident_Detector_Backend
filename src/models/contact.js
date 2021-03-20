@@ -25,14 +25,16 @@ const contactSchema = mongoose.Schema({
     },
     appUser : {
         id : {
-            type: String
+            type: mongoose.Schema.Types.ObjectId
         },
-        notificationToken : {
-            type : String
-        }
+        notificationTokens : [{
+            token:{
+                type : String
+            }
+        }]
     }
 })
 
-const Contact = mongose.model('Contact',contactSchema)
+const Contact = mongoose.model('Contact',contactSchema)
 
 module.exports = Contact

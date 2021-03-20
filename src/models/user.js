@@ -55,6 +55,12 @@ const userSchema = new mongoose.Schema({
     timestamps : true
 })
 
+// userSchema.virtual('notifyContacts',{
+//     ref: 'Contact',
+//     localField : '_id',
+//     foreignField : '_id'
+// })
+
 userSchema.methods.toJSON = function() {
     const user = this
     const userObject = user.toObject()
