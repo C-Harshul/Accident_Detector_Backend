@@ -9,7 +9,7 @@ const Contact = require('../models/contact')
 
 const router = new express.Router()
 
-router.post('/add' ,auth,async(req,res) =>{
+router.post('/addone' ,auth,async(req,res) =>{
    const user = req.user
    const contact = new Contact (req.body)
    
@@ -24,6 +24,26 @@ router.post('/add' ,auth,async(req,res) =>{
    }
 
 })
+
+router.post('/add',auth,async(req,res) => {
+  const user = req.user
+  const contacts = req.body
+
+  try{
+      for await(const contact of contacts ){
+          const contact1 = new Contact(contact)
+          await contact1.save()
+          const id = contact1._id
+          user.notifyContacts.push(id)
+          await user.save() 
+        }
+
+    res.send({user,contacts})    
+  } catch(e) {
+    res.status(400).send() 
+  }
+})
+
 
 router.get('/',auth,async(req,res) => {
     const user = req.user

@@ -25,6 +25,26 @@ router.post('/addone' ,auth,async(req,res) =>{
 
 })
 
+router.post('/add',auth,async(req,res) => {
+    const user = req.user
+    const hospitals = req.body
+
+    try{
+        for await(const hospital of hospitals ){
+            console.log(hospital)
+            const hospital1 = new Hospital(hospital)
+            await hospital1.save()
+            const id = hospital1._id
+            user.hospitals.push(id)
+            await user.save() 
+          }
+
+      res.send({user,hospitals})    
+    } catch(e) {
+      res.status(400).send() 
+    }
+})
+
 
 router.get('/',auth,async(req,res) => {
     const user = req.user

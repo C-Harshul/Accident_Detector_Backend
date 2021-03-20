@@ -13,6 +13,7 @@ const hospitalSchema = mongoose.Schema({
     },
     phoneNumber : {
         type : String,
+        unique:true,
         validate(value) {
             if(!validator.isMobilePhone(value)) {
                 throw new Error('Phone number invalid')
