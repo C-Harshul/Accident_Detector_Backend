@@ -14,10 +14,10 @@ firebase.initializeApp({
 });
 
 const db = firebase.database()
-const ref = db.ref("Accident")
-ref.once("value",(snapshot) => {
-    console.log(snapshot.val());
-})
+// const ref = db.ref("Accident")
+// ref.once("value",(snapshot) => {
+//     console.log(snapshot.val());
+// })
 
 const app = express()
 const port = process.env.PORT||3000
