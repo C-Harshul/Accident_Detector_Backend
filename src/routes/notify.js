@@ -11,9 +11,6 @@ firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
     databaseURL: "https://driveguard-22dfb.firebaseio.com"
   });
-  
-const tokens = ["ehDDW7aRSxuMC__5uul3gb:APA91bGSEZxB8JMawQxoKWzxZXNkYkgnZhTY16WXL--254dtyz2ttjQQgYtJ6UYh8da4O2o0x5TB6wXfx2fsN2XV-PkMfIUaPHkeP4rJPZzu0lNUSZMGK3dCbKJTTiXCjLL8Le_FnDKH"]
-
 
 //Sign Up new User
 router.get('/contacts',auth,async(req,res) => {
