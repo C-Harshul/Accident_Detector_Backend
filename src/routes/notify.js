@@ -3,6 +3,7 @@ const firebase = require('firebase-admin')
 const serviceAccount = require('../../serviceAccountKey.json')
 const router = new express.Router()
 const mongoose = require('mongoose')
+const Contact = require('../models/contact')
 
 const auth = require('../middleware/auth')
 firebase.initializeApp({

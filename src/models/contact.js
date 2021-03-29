@@ -30,14 +30,7 @@ const contactSchema = mongoose.Schema({
         }
     },
     appUser : {
-        id : {
-            type: mongoose.Schema.Types.ObjectId
-        },
-        notificationTokens : [{
-            token:{
-                type : String
-            }
-        }]
+        type: mongoose.Schema.Types.ObjectId  
     }
 })
 

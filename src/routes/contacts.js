@@ -4,8 +4,9 @@
 
 const express = require('express')
 const auth = require('../middleware/auth')
+const mongoose = require('mongoose')
 const Contact = require('../models/contact')
-
+const User = require('../models/user')
 
 const router = new express.Router()
 
@@ -46,6 +47,23 @@ router.post('/add',auth,async(req,res) => {
   } catch(e) {
     res.status(400).send() 
   }
+})
+
+router.post('/addAppUser',auth,async(req,res) => {
+  
+  const ids = req.body.ids 
+  const user = req.user
+  try{
+   ids.forEach(id =>{ 
+     user.notifyContacts.push(id.id)
+   })   
+   await user.save()
+   res.send(user)
+  } catch(e) {
+   res.status(500).send() 
+  }
+   
+
 })
 
 //Get the list of contacts

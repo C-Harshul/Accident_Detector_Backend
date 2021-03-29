@@ -19,10 +19,7 @@ router.post('/new',async(req,res) => {
         name : req.body.name,
         phoneNumber : req.body.number,
         email : req.body.email,
-        appUser :{
-            id : _id,
-            notificationTokens : []
-        }
+        appUser : _id
     })
      try {
      await contact.save()    
