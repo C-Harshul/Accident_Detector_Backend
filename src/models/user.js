@@ -43,8 +43,7 @@ const userSchema = new mongoose.Schema({
     notifyContacts : [{
        contact_ID : {
            type: mongoose.Schema.Types.ObjectId,
-           ref : 'Contact',
-           unique:true
+           ref : 'Contact'
        }
     }],
     hospitals : [{

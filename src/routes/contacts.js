@@ -79,6 +79,24 @@ router.get('/',auth,async(req,res) => {
     }
 })
 
+router.delete('/:id',auth,async(req,res) => {
+  const id = req.params.id
+  console.log(id)
+  try{
+    let lb = req.user.notifyContacts.length
+    console.log(lb)
+    req.user.notifyContacts = req.user.notifyContacts.filter((contact) => contact._id != id)
+    let la = req.user.notifyContacts.length 
+    if(lb === la) {
+      res.status(404).send()
+    }
+    await req.user.save()
+    res.send()
+  } catch(e) {
+      res.status(500).send()
+  }
+})
+
 const getContacts = async(user) => {
     const contactList = [] 
     for await(const contact of user.notifyContacts) {
