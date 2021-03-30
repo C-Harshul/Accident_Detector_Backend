@@ -33,13 +33,18 @@ router.post('/new',async(req,res) => {
 
 //Login user with credentials
 router.post('/login',async (req,res) => {
+
+    const newDeviceToken = req.body.deviceToken
     
     try{
-    
         const user = await User.validateCredentials(req.body.email,req.body.password)
+        if(newDeviceToken == undefined) {
+            user.notificationTokens.push({'token' : newDeviceToken})
+        }                   
+     
         const token = await user.generateAuthtoken()
         res.send({user,token})
-                  
+          
     } catch(e) {
         res.status(404).send()  
     }
@@ -86,6 +91,32 @@ router.get('/me',auth,async(req,res) => {
         res.status(500).send() 
     }
 })
+
+router.patch('/me',auth, async (req,res) => {
+
+    const updates = Object.keys(req.body)
+    const allowed = ['email','password','number']
+    const isValidOperation= updates.every((update) => allowed.includes(update))
+    if(!isValidOperation) {
+        res.status(400).send()
+    }
+
+    try{
+       
+      updates.forEach((update) => {   
+        console.log(req.body[update])  
+        req.user[update] = req.body[update]
+      })
+      console.log(req.user)
+      await req.user.save()
+    
+      res.send(req.user)
+
+    } catch(e) {
+      res.status(500).send()
+    }
+
+  })
 
 router.delete('/me', auth,async (req,res) =>{
     console.log(req.user._id)
