@@ -79,8 +79,8 @@ router.get('/',auth,async(req,res) => {
     }
 })
 
-router.delete('/:id',auth,async(req,res) => {
-  const id = req.params.id
+router.delete('/',auth,async(req,res) => {
+  const id = req.query.id
   console.log(id)
   try{
     let lb = req.user.notifyContacts.length

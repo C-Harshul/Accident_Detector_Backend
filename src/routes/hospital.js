@@ -62,6 +62,24 @@ router.get('/',auth,async(req,res) => {
     }
 })
 
+router.delete('/',auth,async(req,res) => {
+  const id = req.query
+  console.log(id)
+  // try{
+  //   let lb = req.user.hospitals.length
+  //   console.log(lb)
+  //   req.user.hospitals = req.user.hospitals.filter((contact) => contact._id != id)
+  //   let la = req.user.hospitals.length 
+  //   if(lb === la) {
+  //     res.status(404).send()
+  //   }
+  //   await req.user.save()
+  //   res.send()
+  // } catch(e) {
+  //     res.status(500).send()
+  // }
+})
+
 const getHospitals = async(user) => {
     const hospitalList = [] 
     for await(const hospital of user.hospitals) {
