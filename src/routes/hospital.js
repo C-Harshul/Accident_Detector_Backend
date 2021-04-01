@@ -68,7 +68,7 @@ router.delete('/',auth,async(req,res) => {
   try{
     let lb = req.user.hospitals.length
     console.log(lb)
-    req.user.hospitals = req.user.hospitals.filter((contact) => contact._id != id)
+    req.user.hospitals = req.user.hospitals.filter((hospital) => hospital._id != id)
     let la = req.user.hospitals.length 
     if(lb === la) {
       res.status(404).send()
