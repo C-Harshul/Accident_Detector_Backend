@@ -28,9 +28,6 @@ const contactSchema = mongoose.Schema({
                 throw new Error('Email is invalid')
             }
         }
-    },
-    appUser : {
-        type: mongoose.Schema.Types.ObjectId  
     }
 })
 

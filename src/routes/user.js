@@ -16,10 +16,10 @@ router.post('/new',async(req,res) => {
     const _id = new mongoose.Types.ObjectId()
     user._id = _id
     const contact = new Contact({
+        _id: _id,
         name : req.body.name,
         phoneNumber : req.body.number,
         email : req.body.email,
-        appUser : _id
     })
      try {
      await contact.save()    
@@ -35,10 +35,12 @@ router.post('/new',async(req,res) => {
 router.post('/login',async (req,res) => {
 
     const newDeviceToken = req.body.deviceToken
+    console.log(newDeviceToken)
     
     try{
         const user = await User.validateCredentials(req.body.email,req.body.password)
-        if(newDeviceToken == undefined) {
+        if(newDeviceToken !== undefined) {
+            console.log('dcifenfwonf')
             user.notificationTokens.push({'token' : newDeviceToken})
         }                   
      
