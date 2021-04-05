@@ -10,8 +10,9 @@ firebase.initializeApp({
 
 const notifyAppUser = async (person,tokens) => {
 
-   console.log(person,tokens)
-    let payload = {
+   
+    if(tokens !== 0) {
+      let payload = {
         notification : {
           title : 'SOS',
           body : person +"'s car has met with an accident",
@@ -36,7 +37,9 @@ const notifyAppUser = async (person,tokens) => {
         })
        i--; 
       }
-
+    }
+  else 
+    console.log('No app user contacts')
 
 }
 
