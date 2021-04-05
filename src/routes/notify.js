@@ -20,7 +20,7 @@ try{
   await mail("Harshul's car has met with an accident",mailids,(error,resp) => {
     if(error !== undefined) {
       console.log(resp)
-      res.status(500).send('Mail not sent')
+      res.status(500).send(error)
     }
   })
   console.log('Mail sent')

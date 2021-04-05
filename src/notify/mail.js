@@ -12,8 +12,10 @@ var transporter = nodemailer.createTransport({
 
 
 const mail = (message,mailIds,callback) => {
-    console.log(message)  
-    var mailOptions = {
+    console.log(mailIds)  
+    if(mailIds.length !== 0) {
+      console.log('yyyyyyyyyyyyy')
+      var mailOptions = {
         from: 'testharshul@gmail.com',
         to: mailIds,
         subject: 'Message from App',
@@ -31,6 +33,10 @@ const mail = (message,mailIds,callback) => {
            });
            i--;
       }
+    } else {
+      console.log('xxxxxxxxxxxxxxx')
+      callback('No contacts added' , undefined)
+    }
   }
   
   module.exports = mail
