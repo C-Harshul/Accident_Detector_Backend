@@ -10,8 +10,6 @@ firebase.initializeApp({
 
 const notifyAppUser = async (person,tokens) => {
    
-    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-    console.log(tokens.length)
     if(tokens.length !== 0) {
       let payload = {
         notification : {

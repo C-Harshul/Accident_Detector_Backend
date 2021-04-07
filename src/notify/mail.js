@@ -14,7 +14,6 @@ var transporter = nodemailer.createTransport({
 const mail = (message,mailIds,callback) => {
     console.log(mailIds)  
     if(mailIds.length !== 0) {
-      console.log('yyyyyyyyyyyyy')
       var mailOptions = {
         from: 'testharshul@gmail.com',
         to: mailIds,
