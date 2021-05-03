@@ -12,15 +12,15 @@ const serviceAccount = require("../../serviceAccountKey.json");
 
 const router = new express.Router();
 
-const addToken = (user,newDeviceToken) =>{
-
-let no_of_tokens = user.notificationTokens.length;
-let tokenName = "Token " + no_of_tokens
-console.log(tokenName+":"+newDeviceToken);
-var searchRef = firebase.database().ref("Users/"+user.name+"/Contact-Tokens/");
-searchRef.update({ [tokenName]: newDeviceToken });
-
-}
+const addToken = (user, newDeviceToken) => {
+  let no_of_tokens = user.notificationTokens.length;
+  let tokenName = "Token " + no_of_tokens;
+  console.log(tokenName + ":" + newDeviceToken);
+  var searchRef = firebase
+    .database()
+    .ref("Users/" + user.name + "/Contact-Tokens/");
+  searchRef.update({ [tokenName]: newDeviceToken });
+};
 
 //Sign Up new User
 router.post("/new", async (req, res) => {
@@ -38,14 +38,14 @@ router.post("/new", async (req, res) => {
     if (newDeviceToken !== undefined) {
       console.log(newDeviceToken);
       user.notificationTokens.push({ token: newDeviceToken });
-      addToken(user,newDeviceToken)
+      addToken(user, newDeviceToken);
     }
     await contact.save();
     const token = await user.generateAuthtoken();
     await user.save();
     res.send({ user, token });
   } catch (e) {
-    console.log(e)  
+    console.log(e);
     res.status(500).send(e);
   }
 });
@@ -62,7 +62,7 @@ router.post("/login", async (req, res) => {
     );
     if (newDeviceToken !== undefined) {
       user.notificationTokens.push({ token: newDeviceToken });
-      addToken(user,newDeviceToken)
+      addToken(user, newDeviceToken);
     }
 
     const token = await user.generateAuthtoken();
