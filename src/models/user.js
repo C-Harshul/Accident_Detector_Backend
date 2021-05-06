@@ -36,8 +36,7 @@ const userSchema = new mongoose.Schema(
     notificationTokens: [
       {
         token: {
-          type: String,
-          unique: true,
+          type: String
         },
       },
     ],
