@@ -26,6 +26,7 @@ router.get("/contacts", auth, async (req, res) => {
       }
     );
     console.log("Mail sent");
+    console.log(tokens)
     await appNotify(user.name, tokens);
     res.send();
   } catch (e) {
