@@ -13,31 +13,26 @@ const router = new express.Router();
 //Add one contact
 router.post("/addone", auth, async (req, res) => {
   const user = req.user;
- 
+  var contact1  = await Contact.find({email : req.body.email})
+  var contact = contact1[0]
 
-   
+  if(contact.length === 0) contact = new Contact(req.body);
+
+  console.log(contact)
+
   try {
-    var id 
- 
-    if(req.body.appUser === undefined) {
-      console.log(req.body)
-      const contact = new Contact(req.body);
-      console.log(contact)
-      await contact.save();
-
-     id = contact._id;
-    }
-    else {
-      id = req.body.appUser
-    }
-
+    if(contact.length === 0) 
+     await contact.save();
+     console.log(contact._id)
+    const id = contact._id;
     user.notifyContacts.push(id);
     const user1 = await user.save();
     res.send({ user1 });
   } catch (e) {
-    res.status(500).send();
+    res.status(400).send();
   }
 });
+
 
 //Add a list of contacts
 router.post("/add", auth, async (req, res) => {

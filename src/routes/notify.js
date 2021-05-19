@@ -16,7 +16,7 @@ router.get("/contacts", auth, async (req, res) => {
     const mailids = await getMailIds(user);
 
     await mail(
-      "Harshul's car has met with an accident",
+      req.user.name + `'s car has met with an accident`,
       mailids,
       (error, resp) => {
         if (error !== undefined) {
